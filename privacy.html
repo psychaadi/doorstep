@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy · Doorstep</title>
+<style>
+  :root { --purple:#62238F; --green:#0EC27A; --ink:#2E2640; --muted:#6B6585; --bg:#F4F1FA; --card:#FFFFFF; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:40px 16px 64px; }
+  .card { background:var(--card); border-radius:20px; padding:28px; box-shadow:0 10px 30px rgba(98,35,143,.08); }
+  h1 { color:var(--purple); font-size:30px; margin:0 0 4px; }
+  h2 { color:var(--purple); font-size:20px; margin:32px 0 8px; }
+  .muted { color:var(--muted); font-size:14px; }
+  .key { background:#EEF9F3; border-left:4px solid var(--green); padding:14px 16px; border-radius:10px; margin:20px 0; }
+  a { color:var(--purple); }
+  ul { padding-left:22px; }
+  li { margin:4px 0; }
+</style>
+</head>
+<body>
+<main>
+<div class="card">
+<h1>Privacy Policy</h1>
+<p class="muted">Doorstep · Last updated 24 November 2026</p>
+
+<div class="key">
+<strong>In short:</strong> the app has no server of its own. Everything a school records stays on the school's own
+devices and in a Google Sheet in the school's own Google Drive. We, the makers, never receive, see or store any of it.
+Faces are turned into numbers on the check-in device and never leave it.
+</div>
+
+<h2>Who we are</h2>
+<p>Doorstep is an Android app for preschools, made by Aadithya EdTech. It records staff attendance, leave and
+salaries, and the safe drop-off and pick-up of children. The school that installs it decides what is recorded and
+is responsible for that data (under India's Digital Personal Data Protection Act, 2023, the school is the
+Data Fiduciary). The app is the school's tool; we do not process the data on the school's behalf because it never
+reaches us.</p>
+
+<h2>What the app records</h2>
+<ul>
+  <li><strong>Staff:</strong> name, role, phone number, shift times, joining date, birthday (optional), attendance
+    times, leave requests, monthly salary and payslips.</li>
+  <li><strong>Families:</strong> family name, parents and other approved collectors (name, relation, phone,
+    birthday optional), children's names, class and birthday (optional), and each day's drop-off and pick-up times
+    with who collected the child.</li>
+  <li><strong>Consent records:</strong> when a person agreed, to which version of the consent text, and whether they
+    agreed to face recognition.</li>
+  <li><strong>Device notes:</strong> the device model and the time it last synced, so the school can tell if the
+    check-in device stopped working.</li>
+</ul>
+
+<h2>Face recognition</h2>
+<ul>
+  <li>Only staff and parents who give consent can use their face. Everyone else uses a QR card.</li>
+  <li>The device's camera image is turned into a set of numbers (a "faceprint") by software running on the device
+    itself. No photo is saved, and no image or faceprint is ever uploaded, synced or sent anywhere.</li>
+  <li>Faceprints are stored encrypted, only on the device where the face was added (normally the check-in device).</li>
+  <li><strong>Children's faces are never scanned or stored.</strong> Children are checked in and out by a parent or
+    an approved collector.</li>
+  <li>When a person withdraws consent, or is removed, their faceprint is deleted: at once on the device where this is
+    done, and on the check-in device as soon as it next syncs.</li>
+</ul>
+
+<h2>Where the data is kept</h2>
+<ul>
+  <li><strong>On the school's devices</strong> (the check-in device and the admin's phone), so the app works without
+    internet. Salary data is encrypted on each device.</li>
+  <li><strong>In the school's own Google Sheet</strong>, in the Google Drive of the Google account the school signs
+    in with. The Sheet is private to that account unless the school chooses to share it. Google stores it under
+    <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>.</li>
+</ul>
+<p>There is no other copy. We have no database, no server and no access to the school's Google account.</p>
+
+<h2>Google sign-in and what the app can see</h2>
+<p>The app asks Google for one permission only: <em>"See, edit, create and delete only the specific Google Drive
+files you use with this app"</em> (<code>drive.file</code>). It can open the Sheet it created and nothing else in
+the Drive. It cannot read Gmail, contacts, photos or any other file.</p>
+<p>Doorstep's use and transfer of information received from Google APIs adheres to the
+<a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+including the Limited Use requirements. Data from Google APIs is used only to keep the school's Sheet and devices
+in step. It is never sold, never used for advertising, never shown to us, and never used to train any AI model.</p>
+
+<h2>What we do not do</h2>
+<ul>
+  <li>No advertising, no analytics, no tracking and no third-party SDKs that collect data.</li>
+  <li>No AI or cloud services: face matching runs offline on the check-in device.</li>
+  <li>No selling or sharing of data with anyone.</li>
+</ul>
+<p>The only thing the app downloads from us is a small public file that says whether a newer version of the app
+is available. Nothing about the school is sent when it checks.</p>
+
+<h2>Keeping it safe</h2>
+<ul>
+  <li>Admin screens, salaries and settings are behind an admin password, stored only as a salted hash.</li>
+  <li>Family pick-up can be protected by a PIN, and only names on the family's approved list may collect a child.</li>
+  <li>QR cards are signed, so a copied or made-up card is refused; a lost card can be cancelled.</li>
+  <li>All syncing with Google uses encrypted connections (HTTPS).</li>
+</ul>
+
+<h2>How long it is kept, and deleting it</h2>
+<p>The school decides. Records stay until the school deletes them in the app or in its Google Sheet.</p>
+<ul>
+  <li>To delete everything: delete the Google Sheet from Google Drive and uninstall the app (uninstalling removes
+    all data on that device, including faceprints).</li>
+  <li>To stop the app reaching the Google account: remove "Doorstep" at
+    <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
+  <li>Staff and parents who want to see, correct or delete their data should ask the school, which can do it
+    directly in the app or the Sheet.</li>
+</ul>
+
+<h2>Children</h2>
+<p>The app is used by schools, not by children. Information about children is entered by the school with the
+parent's consent, which the app helps the school record.</p>
+
+<h2>Changes</h2>
+<p>If this policy changes, the new version will be posted on this page with a new date.</p>
+
+<h2>Contact</h2>
+<p>Questions about this policy: <a href="mailto:r.aadithyaraj@gmail.com">r.aadithyaraj@gmail.com</a>.
+Questions about a particular school's records should go to that school.</p>
+
+<p class="muted" style="margin-top:32px"><a href="./">← Doorstep home</a></p>
+</div>
+</main>
+</body>
+</html>

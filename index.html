@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doorstep</title>
+<meta name="description" content="Staff attendance, leave, salaries and safe child pick-up for preschools, from one device at the gate.">
+<style>
+  :root { --purple:#62238F; --green:#0EC27A; --ink:#2E2640; --muted:#6B6585; --bg:#F4F1FA; --card:#FFFFFF; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:860px; margin:0 auto; padding:48px 16px 64px; }
+  h1 { color:var(--purple); font-size:38px; line-height:1.15; margin:0 0 12px; }
+  .lead { font-size:20px; color:var(--muted); margin:0 0 32px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .card { background:var(--card); border-radius:20px; padding:22px; box-shadow:0 10px 30px rgba(98,35,143,.08); }
+  .card h2 { font-size:18px; margin:0 0 6px; color:var(--purple); }
+  .card p { margin:0; color:var(--muted); font-size:15px; }
+  .private { margin-top:28px; background:#EEF9F3; border-left:4px solid var(--green); border-radius:12px; padding:18px 20px; }
+  footer { margin-top:40px; color:var(--muted); font-size:14px; }
+  a { color:var(--purple); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Doorstep</h1>
+  <p class="lead">Staff attendance, leave, salaries and safe child pick-up for preschools, from one device at the gate.</p>
+
+  <div class="grid">
+    <div class="card"><h2>Check in by face or card</h2><p>Staff look at the device or show a QR card. Late arrivals and permissions are worked out for you.</p></div>
+    <div class="card"><h2>Leave and calendar</h2><p>Teachers ask for leave on the device. Approve it yourself or let the app follow your rule.</p></div>
+    <div class="card"><h2>Salaries done</h2><p>Monthly pay is worked out from attendance and leave, behind your admin password.</p></div>
+    <div class="card"><h2>Safe pick-up</h2><p>Only the family's approved people, with a family PIN, can collect a child.</p></div>
+  </div>
+
+  <div class="private">
+    <strong>Your data stays yours.</strong> Records live on your school's devices and in a Google Sheet in your own
+    Google Drive. We have no server and never see any of it. Faces never leave the device, and children's faces are
+    never scanned.
+  </div>
+
+  <footer>
+    Made by Aadithya EdTech · <a href="privacy.html">Privacy Policy</a> · <a href="mailto:r.aadithyaraj@gmail.com">Contact</a>
+  </footer>
+</main>
+</body>
+</html>
