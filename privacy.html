@@ -28,7 +28,7 @@
 <div class="key">
 <strong>In short:</strong> the app has no server of its own. Everything a school records stays on the school's own
 devices and in a Google Sheet in the school's own Google Drive. We, the makers, never receive, see or store any of it.
-Faces are turned into numbers on the check-in device and never leave it.
+Faces are turned into numbers on the check-in device; no photo is kept. If the school uses more than one device, those numbers are shared between its devices only in locked (encrypted) form that nobody else can read.
 </div>
 
 <h2>Who we are</h2>
@@ -55,11 +55,17 @@ reaches us.</p>
 <ul>
   <li>Only staff and parents who give consent can use their face. Everyone else uses a QR card.</li>
   <li>The device's camera image is turned into a set of numbers (a "faceprint") by software running on the device
-    itself. No photo is saved, and no image or faceprint is ever uploaded, synced or sent anywhere.</li>
-  <li>Faceprints are stored encrypted, only on the device where the face was added (normally the check-in device).</li>
+    itself. No photo is saved, and a photo can't be made back from a faceprint.</li>
+  <li>Faceprints are stored encrypted on the school's devices. So that all of a school's check-in devices can
+    recognise the same people, each faceprint is also kept in the school's own Google Sheet, <strong>locked with the
+    school's own key</strong> (AES-256 encryption). The key is made on the school's device and is itself locked with
+    the school's admin password, which is never stored in the Sheet. So the copy in the Sheet is unreadable text to
+    anyone without the school's admin password, including Google and us.</li>
+  <li>Faceprints are only shared this way for people who agreed to that wording. People who agreed to an earlier
+    wording ("kept only on this device") stay on the device where their face was added until they agree again.</li>
   <li><strong>Children's faces are never scanned or stored.</strong> Children are checked in and out by a parent or
     an approved collector.</li>
-  <li>When a person withdraws consent, or is removed, their faceprint is deleted: at once on the device where this is
+  <li>When a person withdraws consent, or is removed, their faceprint is deleted everywhere: at once on the device where this is
     done, and on the check-in device as soon as it next syncs.</li>
 </ul>
 
