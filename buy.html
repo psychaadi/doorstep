@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buy Doorstep</title>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<main>
+<nav class="top"><a href="index.html">← Doorstep</a></nav>
+<div class="card">
+<h1>Buy Doorstep</h1>
+<p class="muted">Pay safely with UPI, card or netbanking through Razorpay. Doorstep unlocks by itself a few minutes after payment.</p>
+
+<form id="f" novalidate>
+  <div class="plans">
+    <label class="plan on" id="pl-life">
+      <input type="radio" name="plan" value="lifetime" checked> <strong>Founding Lifetime</strong>
+      <div class="price">₹5,000</div>
+      <div class="muted">Pay once, use for life. For the first 200 schools. <span class="badge" id="left">Places left: …</span></div>
+    </label>
+    <label class="plan" id="pl-month">
+      <input type="radio" name="plan" value="monthly"> <strong>Monthly</strong>
+      <div class="price">₹2,000<span style="font-size:15px;font-weight:600"> / month</span></div>
+      <div class="muted">Renews every month by itself. Stop any time.</div>
+    </label>
+  </div>
+
+  <label class="f" for="school">School code (shown in the Doorstep app under Admin → Doorstep licence)</label>
+  <input class="t" id="school" placeholder="DS-XXXXXX" autocomplete="off" style="text-transform:uppercase">
+  <label class="f" for="name">School name</label>
+  <input class="t" id="name" autocomplete="organization">
+  <label class="f" for="person">Your name</label>
+  <input class="t" id="person" autocomplete="name">
+  <label class="f" for="phone">Mobile number</label>
+  <input class="t" id="phone" type="tel" autocomplete="tel" placeholder="98765 43210">
+  <label class="f" for="email">Email (your receipt and invoice go here)</label>
+  <input class="t" id="email" type="email" autocomplete="email">
+
+  <label class="agree"><input type="checkbox" id="agree">
+    <span>I have read and accept the <a href="agreement.pdf" target="_blank">Doorstep Licence and Setup Agreement</a>,
+    the <a href="terms.html" target="_blank">Terms</a> and the <a href="refunds.html" target="_blank">Refund policy</a>,
+    on behalf of the school.</span></label>
+
+  <button class="pay" id="go" type="submit">Continue to payment</button>
+  <div class="err" id="err"></div>
+</form>
+</div>
+<footer><a href="terms.html">Terms</a> · <a href="refunds.html">Refunds and cancellations</a> · <a href="delivery.html">Delivery</a> ·
+  <a href="privacy.html">Privacy</a> · <a href="contact.html">Contact</a><br>Doorstep is made by Aadithya EdTech, Chennai.</footer>
+</main>
+<script>
+const DESK = 'https://script.google.com/macros/s/AKfycbw2qhGisIwpli_U6-wiajDFERfCqtKPxKRUWAsf1uHsY8oHe9BPFN1tfbQ6drJfOmki/exec';
+const $ = id => document.getElementById(id);
+const q = new URLSearchParams(location.search);
+if (q.get('school')) $('school').value = q.get('school').toUpperCase();
+if (q.get('name')) $('name').value = q.get('name');
+if (q.get('plan') === 'monthly') document.querySelector('input[value=monthly]').checked = true;
+
+function paint() {
+  document.querySelectorAll('.plan').forEach(p => p.classList.toggle('on', p.querySelector('input').checked));
+}
+document.querySelectorAll('input[name=plan]').forEach(r => r.addEventListener('change', paint));
+paint();
+
+fetch(DESK + '?action=offer').then(r => r.json()).then(o => {
+  if (!o.ok) return;
+  $('left').textContent = 'Places left: ' + o.foundingLeft;
+  if (o.foundingLeft <= 0) {
+    const life = document.querySelector('input[value=lifetime]');
+    life.disabled = true; $('pl-life').classList.add('off');
+    document.querySelector('input[value=monthly]').checked = true; paint();
+  }
+}).catch(() => { $('left').textContent = 'Limited places'; });
+
+$('f').addEventListener('submit', async e => {
+  e.preventDefault();
+  $('err').textContent = '';
+  const v = id => $(id).value.trim();
+  const school = v('school').toUpperCase();
+  if (!/^DS-[A-Z0-9]{4,8}$/.test(school)) return $('err').textContent = 'Enter the school code from the app, like DS-7K3P2Q.';
+  if (!v('name') || !v('person')) return $('err').textContent = 'Please fill in the school name and your name.';
+  if (v('phone').replace(/\D/g, '').length < 10) return $('err').textContent = 'Please enter a 10-digit mobile number.';
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('email'))) return $('err').textContent = 'Please enter a valid email.';
+  if (!$('agree').checked) return $('err').textContent = 'Please tick the box to accept the agreement.';
+  const p = new URLSearchParams({ action: 'buy', school, name: v('name'), person: v('person'), phone: v('phone'),
+    email: v('email'), plan: document.querySelector('input[name=plan]:checked').value, agree: 'yes' });
+  $('go').disabled = true; $('go').textContent = 'Getting your payment page…';
+  try {
+    const o = await (await fetch(DESK + '?' + p)).json();
+    if (!o.ok) throw new Error(o.error || 'Something went wrong.');
+    location.href = o.pay;
+  } catch (err) {
+    $('err').textContent = err.message.startsWith('Razorpay') || err.message.includes('not set up')
+      ? 'Payments are being set up. Please try again later, or contact us.' : err.message;
+    $('go').disabled = false; $('go').textContent = 'Continue to payment';
+  }
+});
+</script>
+</body>
+</html>

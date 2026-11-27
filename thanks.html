@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you · Doorstep</title>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<main>
+<div class="card" style="text-align:center">
+<div style="font-size:54px">🎉</div>
+<h1 id="h">Thank you!</h1>
+<p id="msg">Your payment has reached us. Doorstep will unlock on your school's devices within a few minutes:
+open the app, go to Admin → Doorstep licence and tap <strong>Check again</strong>.</p>
+<p class="muted">Your receipt and invoice are on their way to your email. Keep them for your records.</p>
+<p class="muted">Anything not right? <a href="contact.html">Contact us</a> and we'll sort it out the same day.</p>
+</div>
+<footer><a href="terms.html">Terms</a> · <a href="refunds.html">Refunds and cancellations</a> · <a href="privacy.html">Privacy</a> · <a href="contact.html">Contact</a></footer>
+</main>
+<script>
+// Razorpay sends ?razorpay_payment_link_status=paid (or failed/cancelled) back here.
+const s = new URLSearchParams(location.search).get('razorpay_payment_link_status');
+if (s && s !== 'paid') {
+  document.getElementById('h').textContent = 'The payment didn’t go through';
+  document.getElementById('msg').innerHTML = 'You can <a href="buy.html">try again</a>. If money left your account anyway, <a href="contact.html">contact us</a> and we’ll sort it out.';
+}
+</script>
+</body>
+</html>

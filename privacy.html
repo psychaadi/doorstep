@@ -23,11 +23,11 @@
 <main>
 <div class="card">
 <h1>Privacy Policy</h1>
-<p class="muted">Doorstep · Last updated 25 November 2026</p>
+<p class="muted">Doorstep · Last updated 27 November 2026</p>
 
 <div class="key">
 <strong>In short:</strong> the app has no server of its own. Everything a school records stays on the school's own
-devices and in a Google Sheet in the school's own Google Drive. We, the makers, never receive, see or store any of it.
+devices and in a Google Sheet in the school's own Google Drive. We, the makers, never receive, see or store any of it. To check the school's licence, the app tells us only the school's code and name, an anonymous device code and the app version.
 Faces are turned into numbers on the check-in device; no photo is kept. If the school uses more than one device, those numbers are shared between its devices only in locked (encrypted) form that nobody else can read.
 </div>
 
@@ -94,8 +94,25 @@ in step. It is never sold, never used for advertising, never shown to us, and ne
   <li>No AI or cloud services: face matching runs offline on the check-in device.</li>
   <li>No selling or sharing of data with anyone.</li>
 </ul>
-<p>The only thing the app downloads from us is a small public file that says whether a newer version of the app
+<p>The direct-download version also reads a small public file that says whether a newer version of the app
 is available. Nothing about the school is sent when it checks.</p>
+
+<h2>Licence checks and buying a licence</h2>
+<p>A few times a day, the app asks our licence service (a Google Apps Script run by Aadithya EdTech) whether the
+school's trial or licence is active. It sends only:</p>
+<ul>
+  <li>the school code (like DS-7K3P2Q), made at random by the app;</li>
+  <li>the school name typed in during setup;</li>
+  <li>an anonymous device code (a one-way scramble of the device's Android ID, which can't be turned back into it);</li>
+  <li>the app version and whether it is the Play Store or direct-download version.</li>
+</ul>
+<p>No staff, family, child, attendance, face or salary data is ever sent. We keep these details in our own Google
+Sheet to run licences, for as long as the school uses Doorstep and up to 8 years after (for tax records).</p>
+<p>When a school buys a licence on our website, we also keep the buyer's name, phone and email and the payment
+details Razorpay gives us (amount, date, payment ID), to issue the licence, send the invoice and keep accounts as
+the law requires. Card, UPI and bank details go only to Razorpay, under
+<a href="https://razorpay.com/privacy/">its privacy policy</a>; we never see them. We are the Data Fiduciary for
+these buyer details, and you can ask us to see, correct or delete them, except what tax law makes us keep.</p>
 
 <h2>Keeping it safe</h2>
 <ul>
@@ -143,7 +160,7 @@ parent's consent, which the app helps the school record.</p>
 <p>If this policy changes, the new version will be posted on this page with a new date.</p>
 
 <h2>Contact</h2>
-<p>Doorstep is made by Aadithya EdTech. Questions about this policy: <a href="mailto:r.aadithyaraj@gmail.com">r.aadithyaraj@gmail.com</a>
+<p>Doorstep is made by Aadithya EdTech. Questions about this policy: <a href="mailto:doorstep.aadithyaedtech@gmail.com">doorstep.aadithyaedtech@gmail.com</a>
 or phone/WhatsApp 90032 88176.
 Questions about a particular school's records should go to that school.</p>
 
