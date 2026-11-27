@@ -11,7 +11,7 @@
 <nav class="top"><a href="index.html">← Doorstep</a></nav>
 <div class="card">
 <h1>Buy Doorstep</h1>
-<p class="muted">Send us your order and we'll reply on WhatsApp with UPI and bank details. Doorstep unlocks on your devices as soon as your payment is confirmed, and your invoice comes by email.</p>
+<p class="muted">Pay by UPI, card or netbanking. Doorstep unlocks on your devices within minutes of payment, and your invoice comes by email.</p>
 
 <form id="f" novalidate>
   <div class="plans">
@@ -43,7 +43,7 @@
     the <a href="terms.html" target="_blank">Terms</a> and the <a href="refunds.html" target="_blank">Refund policy</a>,
     on behalf of the school.</span></label>
 
-  <button class="pay" id="go" type="submit">Send my order</button>
+  <button class="pay" id="go" type="submit">Continue to payment</button>
   <div class="err" id="err"></div>
 </form>
 <div id="sent" hidden style="text-align:center">
@@ -93,7 +93,7 @@ $('f').addEventListener('submit', async e => {
   if (!$('agree').checked) return $('err').textContent = 'Please tick the box to accept the agreement.';
   const p = new URLSearchParams({ action: 'buy', school, name: v('name'), person: v('person'), phone: v('phone'),
     email: v('email'), plan: document.querySelector('input[name=plan]:checked').value, agree: 'yes' });
-  $('go').disabled = true; $('go').textContent = 'Sending…';
+  $('go').disabled = true; $('go').textContent = 'One moment…';
   try {
     const o = await (await fetch(DESK + '?' + p)).json();
     if (!o.ok) throw new Error(o.error || 'Something went wrong.');
@@ -108,7 +108,7 @@ $('f').addEventListener('submit', async e => {
   } catch (err) {
     $('err').textContent = err.message.startsWith('Razorpay') || err.message.includes('not set up')
       ? 'Payments are being set up. Please try again later, or contact us.' : err.message;
-    $('go').disabled = false; $('go').textContent = 'Send my order';
+    $('go').disabled = false; $('go').textContent = 'Continue to payment';
   }
 });
 </script>
