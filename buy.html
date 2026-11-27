@@ -11,7 +11,7 @@
 <nav class="top"><a href="index.html">← Doorstep</a></nav>
 <div class="card">
 <h1>Buy Doorstep</h1>
-<p class="muted">Pay safely with UPI, card or netbanking through Razorpay. Doorstep unlocks by itself a few minutes after payment.</p>
+<p class="muted">Send us your order and we'll reply on WhatsApp with UPI and bank details. Doorstep unlocks on your devices as soon as your payment is confirmed, and your invoice comes by email.</p>
 
 <form id="f" novalidate>
   <div class="plans">
@@ -20,7 +20,7 @@
       <div class="price">₹5,000</div>
       <div class="muted">Pay once, use for life. For the first 200 schools. <span class="badge" id="left">Places left: …</span></div>
     </label>
-    <label class="plan" id="pl-month">
+    <label class="plan" id="pl-month" hidden>
       <input type="radio" name="plan" value="monthly"> <strong>Monthly</strong>
       <div class="price">₹2,000<span style="font-size:15px;font-weight:600"> / month</span></div>
       <div class="muted">Renews every month by itself. Stop any time.</div>
@@ -43,9 +43,16 @@
     the <a href="terms.html" target="_blank">Terms</a> and the <a href="refunds.html" target="_blank">Refund policy</a>,
     on behalf of the school.</span></label>
 
-  <button class="pay" id="go" type="submit">Continue to payment</button>
+  <button class="pay" id="go" type="submit">Send my order</button>
   <div class="err" id="err"></div>
 </form>
+<div id="sent" hidden style="text-align:center">
+  <div style="font-size:50px">📨</div>
+  <h2 style="margin-top:6px">Order <span id="ord"></span> received</h2>
+  <p>One last step: send it to us on WhatsApp. We'll reply with payment details, and Doorstep unlocks once your payment is confirmed.</p>
+  <p><a id="wa" class="pay" style="display:inline-block;text-decoration:none;width:auto;padding:14px 28px" href="#">Send on WhatsApp</a></p>
+  <p class="muted">WhatsApp didn't open? Message <a href="https://wa.me/919003288176">+91 90032 88176</a> with your order number and school code.</p>
+</div>
 </div>
 <footer><a href="terms.html">Terms</a> · <a href="refunds.html">Refunds and cancellations</a> · <a href="delivery.html">Delivery</a> ·
   <a href="privacy.html">Privacy</a> · <a href="contact.html">Contact</a><br>Doorstep is made by Aadithya EdTech, Chennai.</footer>
@@ -56,7 +63,6 @@ const $ = id => document.getElementById(id);
 const q = new URLSearchParams(location.search);
 if (q.get('school')) $('school').value = q.get('school').toUpperCase();
 if (q.get('name')) $('name').value = q.get('name');
-if (q.get('plan') === 'monthly') document.querySelector('input[value=monthly]').checked = true;
 
 function paint() {
   document.querySelectorAll('.plan').forEach(p => p.classList.toggle('on', p.querySelector('input').checked));
@@ -68,6 +74,7 @@ fetch(DESK + '?action=offer').then(r => r.json()).then(o => {
   if (!o.ok) return;
   $('left').textContent = 'Places left: ' + o.foundingLeft;
   if (o.foundingLeft <= 0) {
+    $('pl-month').hidden = false;
     const life = document.querySelector('input[value=lifetime]');
     life.disabled = true; $('pl-life').classList.add('off');
     document.querySelector('input[value=monthly]').checked = true; paint();
@@ -86,15 +93,22 @@ $('f').addEventListener('submit', async e => {
   if (!$('agree').checked) return $('err').textContent = 'Please tick the box to accept the agreement.';
   const p = new URLSearchParams({ action: 'buy', school, name: v('name'), person: v('person'), phone: v('phone'),
     email: v('email'), plan: document.querySelector('input[name=plan]:checked').value, agree: 'yes' });
-  $('go').disabled = true; $('go').textContent = 'Getting your payment page…';
+  $('go').disabled = true; $('go').textContent = 'Sending…';
   try {
     const o = await (await fetch(DESK + '?' + p)).json();
     if (!o.ok) throw new Error(o.error || 'Something went wrong.');
+    if (o.manual) {
+      $('f').hidden = true; $('sent').hidden = false;
+      $('ord').textContent = o.order; $('wa').href = o.wa;
+      window.scrollTo(0, 0);
+      location.href = o.wa;
+      return;
+    }
     location.href = o.pay;
   } catch (err) {
     $('err').textContent = err.message.startsWith('Razorpay') || err.message.includes('not set up')
       ? 'Payments are being set up. Please try again later, or contact us.' : err.message;
-    $('go').disabled = false; $('go').textContent = 'Continue to payment';
+    $('go').disabled = false; $('go').textContent = 'Send my order';
   }
 });
 </script>
